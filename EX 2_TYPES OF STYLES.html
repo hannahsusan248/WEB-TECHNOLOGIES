@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Shop</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc; /* Light beige background */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #ff8c00; /* Dark orange color */
+            text-align: center;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #d2691e; /* Chocolate color */
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-container {
+            text-align: center;
+            margin: auto;
+            display: block;
+            border-color: #ff6347; /* Tomato color */
+        }
+        .styled-image {
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 10px 10px 20px rgba(255, 99, 71, 0.5); /* Tomato shadow */
+            border: 5px solid #ff4500; /* Orange-red border */
+        }
+    </style>
+
+    <!-- Linking External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Inline CSS -->
+    <div style="background-color: #fff; padding: 20px; margin: 20px;">
+        <h1 style="color: #ff4500;">WELCOME TO OUR JUICE SHOP!</h1>
+    </div>
+
+    <div style="text-align: center;">
+        <img src="Pineapple-Juice.jpg" alt="Pineapple Juice" class="styled-image" usemap="#juice-map">
+        <img src="orange-juice.jpeg" alt="Orange Juice" class="styled-image" usemap="#juice-map">
+    </div>
+
+    <map name="juice-map">
+        <area shape="rect" coords="50,50,350,250" alt="Pineapple Juice" href="https://3.bp.blogspot.com/-T6UUfH6AxMQ/VVL_2it1NGI/AAAAAAAA2DY/uimHcVCSwOU/s1600/pure%2Bpineapple%2Bjuice.jpg">
+        <area shape="rect" coords="400,50,700,250" alt="Orange Juice" href="https://images.freeimages.com/images/large-previews/801/orange-juice-1321161.jpg">
+    </map>
+
+    <div class="image-container">
+        <p style="color: #ff4500; font-size: 18px;"><i>Fresh and Delicious Juices</i></p>
+    </div>
+
+    <div style="background-color: #fff; padding: 20px; margin: 20px;">
+        <h1>ABOUT OUR JUICES</h1>
+        <h2>Explore Our Variety of Fresh Juices</h2>
+        <p style="color: #ff8c00; font-size: 20px;"><strong>Juices</strong> are not just refreshing but also packed with essential vitamins and nutrients. From the tropical taste of pineapple to the citrus burst of orange, our juices are crafted to deliver both flavor and health benefits.</p>
+        <p style="color: #d2691e; font-size: 20px;">Discover our range of juices made from the finest ingredients. Each juice is designed to tantalize your taste buds and provide a healthy alternative to sugary beverages. Enjoy the freshness in every sip!</p>
+    </div>
+
+</body>
+</html>
