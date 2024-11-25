@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Shop</title>
+    <style>
+        #time {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%; /* Full width */
+            max-width: 300px; /* Max width */
+            margin: auto; /* Center container */
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .image {
+            width: 100%;
+            object-fit: cover; /* Cover the container */
+            transition: transform 0.3s ease;
+        }
+
+        .text {
+            position: absolute;
+            top: 50%; /* Start in the middle of the image */
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center it */
+            color: #ffffff;
+            text-align: center;
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.3s ease, top 0.3s ease; /* Smooth transition */
+        }
+
+        .container:hover .image {
+            transform: scale(1.1);
+        }
+
+        .container:hover .text {
+            top: 20%;
+            opacity: 1; /* Fade in */
+        }
+
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        #hoverText {
+            font-size: 24px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Form Section (First) -->
+    <div class="form-container">
+        <form>
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="juice">Favorite Juice:</label>
+            <input type="text" id="juice" name="juice" required>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+
+    <!-- Time Display Section -->
+    <button id="showTimeButton">Show Current Time</button>
+    <div id="time"></div>
+
+    <script>
+        let interval;
+
+        document.getElementById('showTimeButton').addEventListener('click', function() {
+            clearInterval(interval);
+            updateTime();
+            interval = setInterval(updateTime, 1000);
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('time').textContent = timeString;
+        }
+    </script>
+
+    <!-- Image Hover Section -->
+    <div class="container">
+        <img src="juice.jpg" alt="Fresh Juice" class="image">
+        <div class="text">Fresh and Delicious!</div>
+    </div>
+
+    <!-- Hover Text Section -->
+    <div id="hoverText">Welcome</div>
+
+    <script>
+        const hoverText = document.getElementById('hoverText');
+
+        hoverText.addEventListener('mouseenter', () => {
+            hoverText.textContent = 'Check our Juices!';
+        });
+
+        hoverText.addEventListener('mouseleave', () => {
+            hoverText.textContent = 'Welcome Back!';
+        });
+    </script>
+
+    <!-- Change Background Color on Click -->
+    <script>
+        // Array of colors to change the background randomly
+        const colors = ['#ffcc80', '#ff7043', '#ff5722', '#e64a19', '#bf360c'];
+
+        // Event listener for any click/touch on the body
+        document.addEventListener('click', () => {
+            // Get a random color from the array
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            // Change the background color
+            document.body.style.backgroundColor = randomColor;
+        });
+    </script>
+
+</body>
+</html>
