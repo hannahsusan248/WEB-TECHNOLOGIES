@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Shop</title>
+    <link rel="stylesheet" href="style5.css">
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Time Display Section -->
+        <div id="time1">
+            <button id="showTimeButton">Show Current Time</button>
+            <div id="time"></div>
+        </div>
+
+        <!-- Juice Image Hover Section -->
+        <div class="container">
+            <img src="juice.jpg" alt="Fresh Juice" class="image">
+            <div class="text">Refreshing Juices, Just for You!</div>
+        </div>
+
+        <!-- Hover Text Section -->
+        <div id="hoverText">Hover here</div>
+    </div>
+
+    <script>
+        let interval;
+
+        // Show Current Time Button Functionality
+        document.getElementById('showTimeButton').addEventListener('click', function() {
+            clearInterval(interval);
+            updateTime();
+            interval = setInterval(updateTime, 1000);
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('time').textContent = timeString;
+        }
+
+        // Hover Text Functionality
+        const hoverText = document.getElementById('hoverText');
+
+        hoverText.addEventListener('mouseenter', () => {
+            hoverText.textContent = 'Explore Our Juices!';
+        });
+
+        hoverText.addEventListener('mouseleave', () => {
+            hoverText.textContent = 'Hover here';
+        });
+    </script>
+</body>
+</html>
