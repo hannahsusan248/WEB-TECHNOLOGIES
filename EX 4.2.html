@@ -5,166 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juice Shop</title>
     <style>
-        #time {
-            font-size: 2em;
-            margin-top: 20px;
-        }
-
-        .container {
-            position: relative;
-            width: 100%; /* Full width */
-            max-width: 300px; /* Max width */
-            margin: auto; /* Center container */
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .image {
-            width: 100%;
-            object-fit: cover; /* Cover the container */
-            transition: transform 0.3s ease;
-        }
-
-        .text {
-            position: absolute;
-            top: 50%; /* Start in the middle of the image */
-            left: 50%;
-            transform: translate(-50%, -50%); /* Center it */
-            color: #ffffff;
-            text-align: center;
-            opacity: 0; /* Start hidden */
-            transition: opacity 0.3s ease, top 0.3s ease; /* Smooth transition */
-        }
-
-        .container:hover .image {
-            transform: scale(1.1);
-        }
-
-        .container:hover .text {
-            top: 20%;
-            opacity: 1; /* Fade in */
-        }
-
         body {
-            margin: 20px;
             font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        #hoverText {
-            font-size: 24px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .form-container {
-            max-width: 400px;
-            margin: 20px auto;
+        header {
+            background-color: #ff704d;
+            color: white;
             padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 24px;
         }
 
-        .form-container label {
-            display: block;
-            margin-bottom: 8px;
+        #time-display {
+            margin-top: 10px;
+            font-size: 18px;
         }
 
-        .form-container input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border-radius: 4px;
+        section {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .product-container {
+            display: inline-block;
+            position: relative;
+            margin: 20px;
+        }
+
+        .product-container img {
+            width: 200px;
+            height: 200px;
             border: 1px solid #ccc;
         }
 
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #ff9800;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .tooltip {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
         }
 
-        .form-container button:hover {
-            background-color: #e68a00;
+        .product-container:hover .tooltip {
+            display: block;
+        }
+
+        .color-button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #hover-text {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        #hover-text:hover {
+            color: darkorange;
         }
     </style>
 </head>
 <body>
+    <header>
+        Welcome to Fresh Juice Shop
+        <div id="time-display">Loading current time...</div>
+    </header>
 
-    <!-- Form Section (First) -->
-    <div class="form-container">
-        <form>
-            <label for="customerName">Customer Name:</label>
-            <input type="text" id="customerName" name="customerName" required>
+    <section>
+        <!-- Dynamic Time Display -->
+        <h2>Explore Our Fresh Juices</h2>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <!-- Feature: Display text when an image is hovered -->
+        <div class="product-container">
+            <img src="orange-juice.jpeg" alt="Orange Juice">
+            <div class="tooltip">Refreshing Orange Juice</div>
+        </div>
+        <div class="product-container">
+            <img src="apple-juice.jpg" alt="Apple Juice">
+            <div class="tooltip">Sweet Apple Juice</div>
+        </div>
+        <div class="product-container">
+            <img src="pineapple-juice.jpg" alt="Berry Juice">
+            <div class="tooltip">Tasty Berry Juice</div>
+        </div>
 
-            <label for="juice">Favorite Juice:</label>
-            <input type="text" id="juice" name="juice" required>
+        <!-- Feature: Change background color on click -->
+        <h2>Choose Your Shop Theme</h2>
+        <button class="color-button" style="background-color: lightgoldenrodyellow;" onclick="changeBackground('lightgoldenrodyellow')">Sunny Yellow</button>
+        <button class="color-button" style="background-color: lightpink;" onclick="changeBackground('lightpink')">Blush Pink</button>
+        <button class="color-button" style="background-color: palegreen;" onclick="changeBackground('palegreen')">Fresh Green</button>
 
-            <button type="submit">Place Order</button>
-        </form>
-    </div>
-
-    <!-- Time Display Section -->
-    <button id="showTimeButton">Show Current Time</button>
-    <div id="time"></div>
+        <!-- Feature: Change text when hovered -->
+        <h2 id="hover-text" onmouseover="changeText(this)" onmouseout="resetText(this)">Hover over me for a juice tip!</h2>
+    </section>
 
     <script>
-        let interval;
-
-        document.getElementById('showTimeButton').addEventListener('click', function() {
-            clearInterval(interval);
-            updateTime();
-            interval = setInterval(updateTime, 1000);
-        });
-
+        // Dynamic Time Display
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString();
-            document.getElementById('time').textContent = timeString;
+            document.getElementById('time-display').textContent = `Current Time: ${timeString}`;
+        }
+        setInterval(updateTime, 1000); // Update every second
+        updateTime(); // Call immediately on load
+
+        // Change Background Color
+        function changeBackground(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        // Change Text on Hover
+        function changeText(element) {
+            element.textContent = "Stay hydrated and enjoy fresh juices!";
+        }
+
+        function resetText(element) {
+            element.textContent = "Hover over me for a juice tip!";
         }
     </script>
-
-    <!-- Image Hover Section -->
-    <div class="container">
-        <img src="juice.jpg" alt="Fresh Juice" class="image">
-        <div class="text">Fresh and Delicious!</div>
-    </div>
-
-    <!-- Hover Text Section -->
-    <div id="hoverText">Welcome</div>
-
-    <script>
-        const hoverText = document.getElementById('hoverText');
-
-        hoverText.addEventListener('mouseenter', () => {
-            hoverText.textContent = 'Check our Juices!';
-        });
-
-        hoverText.addEventListener('mouseleave', () => {
-            hoverText.textContent = 'Welcome Back!';
-        });
-    </script>
-
-    <!-- Change Background Color on Click -->
-    <script>
-        // Array of colors to change the background randomly
-        const colors = ['#ffcc80', '#ff7043', '#ff5722', '#e64a19', '#bf360c'];
-
-        // Event listener for any click/touch on the body
-        document.addEventListener('click', () => {
-            // Get a random color from the array
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            // Change the background color
-            document.body.style.backgroundColor = randomColor;
-        });
-    </script>
-
 </body>
 </html>
